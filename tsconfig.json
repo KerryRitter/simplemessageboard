@@ -11,6 +11,12 @@
     "preserveConstEnums": true,
     "removeComments": false,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "es2015"
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es2015",
+    "baseUrl": ".",
+    "paths": {
+        "*": ["./src/ts/*"]
+    }
   }
 }
