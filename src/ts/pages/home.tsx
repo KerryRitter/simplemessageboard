@@ -1,19 +1,16 @@
 import React from "react";
 import { inject } from "inversify";
-import { HackerNewsApi } from "../services/hackerNewsApi";
-import { lazyInject } from "../ioc/ioc";
+import { HackerNewsApi } from "../services";
+import { lazyInject } from "../ioc";
 
 interface HomeState {
     stories: number[];
 }
 
 export class Home extends React.Component<any, HomeState> {
-    @lazyInject("HackerNewsApi") 
-    private _hackerNewsApi: HackerNewsApi
+    @lazyInject("HackerNewsApi") private _hackerNewsApi: HackerNewsApi
 
-    public constructor(
-        props: any
-    ) {
+    public constructor(props: any) {
         super();
         this.state = {
             stories: []

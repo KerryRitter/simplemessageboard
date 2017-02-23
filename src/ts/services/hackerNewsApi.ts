@@ -1,5 +1,5 @@
 import jQuery from "jquery";
-import { provide } from "../ioc/ioc";
+import { provide } from "../ioc";
 
 @provide("HackerNewsApi")
 export class HackerNewsApi {

@@ -2,7 +2,7 @@ import "babel-polyfill";
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRedirect, hashHistory } from "react-router";
-import { Home } from "./pages/home";
+import { Home } from "./pages";
 import { App } from "./app";
 
 ReactDOM.render((
