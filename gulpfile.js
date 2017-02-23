@@ -62,5 +62,5 @@ gulp.task("server:reload", function () {
 });
 
 gulp.task("serve", function() {
-    runSequence("clean", ["sass:compile", "static:compile"], ["watch", "server:start"]);
+    runSequence(["sass:compile", "static:compile"], ["watch", "server:start"]);
 });
