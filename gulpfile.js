@@ -66,18 +66,6 @@ gulp.task("server:reload", function () {
     gulp.src("dist/**/*.*").pipe(connect.reload());
 });
 
-gulp.task("dev", function() {
-    runSequence("compile", ["watch", "server:start"]);
-});
-
-gulp.task("prodserver:start", function() {
-    var express = require("express")
-    var app = express();
-
-    app.use(express.static("dist", {"index": "index.html"}))
-    app.listen(7777);
-});
-
 gulp.task("default", function() {
-    runSequence("compile", "prodserver:start");
+    runSequence("compile", ["watch", "server:start"]);
 });
