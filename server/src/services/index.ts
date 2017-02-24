@@ -1,2 +1,2 @@
-export * from "./boardService";
+export * from "./threadService";
 export * from "./mongoService";

@@ -1,1 +1,1 @@
-export * from "./hackerNewsApi";
+export * from "./threadApiService";

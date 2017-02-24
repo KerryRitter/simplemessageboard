@@ -7,7 +7,6 @@ var sass = require("./build/sass");
 var lint = require("./build/lint");
 var webpack = require("./build/webpack");
 var staticFiles = require("./build/staticFiles");
-var tests = require("./build/tests");
 var clean = require("./build/clean");
 var server = require("./build/server");
 var ejs = require("./build/ejs");
@@ -24,10 +23,6 @@ gulp.task("client:ts:lint", function () {
     lint.run();
 });
 
-gulp.task("server:ejs:compile", function() {
-    ejs.build();
-});
-
 gulp.task("server:ts:compile", function() {
     server.build();
 });
@@ -37,30 +32,24 @@ gulp.task("static:compile", function () {
 });
 
 gulp.task("compile", function() { 
-    runSequence("clean", ["client:sass:compile", "client:ts:compile", "server:ts:compile", "server:ejs:compile", "static:compile"]);
+    runSequence("clean", ["client:sass:compile", "client:ts:compile", "server:ts:compile", "static:compile"]);
 });
 
 gulp.task("clean", function() {
     clean.run();
 });
 
-gulp.task("watch", function (done) {
+gulp.task("serve", function() {
     webpack.watch().then(function () {
         gutil.log("Now that initial assets (js and css) are generated injection starts...");
-        ejs.watch();
         lint.watch();
         sass.watch();
         staticFiles.watch();
-        tests.watch();
         server.watch();
-        done();
+        server.serve();
     }).catch(function (error) {
         gutil.log("Problem generating initial assets (js and css)", error);
     });
-});
-
-gulp.task("serve", function() {
-    server.serve();
 });
 
 gulp.task("default", function() {

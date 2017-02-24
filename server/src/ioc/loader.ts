@@ -1,2 +1,2 @@
-import "./controllers";
-import "./services";
+import "../controllers";
+import "../services";

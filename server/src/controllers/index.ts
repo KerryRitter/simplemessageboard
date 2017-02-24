@@ -1,2 +1,3 @@
 export * from "./baseController";
-export * from "./boardController";
+export * from "./threadController";
+export * from "./homeController";

@@ -1,16 +1,10 @@
+import * as Mongo from "mongodb";
 import { provide } from "../ioc";
-import Mongo from "mongodb";
 
 @provide("MongoService")
 export class MongoService {
-    private static __db: Mongo.Db;
-    private readonly _databaseUrl = "";
-    private get _db() {
-        return MongoService.__db;
-    }
-    private set _db(db: Mongo.Db) {
-        MongoService.__db = db;
-    }
+    private _db: Mongo.Db;
+    private readonly _databaseUrl = process.env.MONGODB_URI;
 
     public connect() {
         return new Promise<MongoService>((resolve, reject) => {
@@ -30,13 +24,25 @@ export class MongoService {
         });
     }
 
-    public insertDocuments<T>(collection: string, documents: T|T[]) {
+    public insert<T>(collection: string, documents: T|T[]) {
         return new Promise((resolve, reject) => {
-            if (document instanceof Array) {
+            if (documents instanceof Array) {
                 this._db.collection(collection).insertMany(documents as T[], (err, result) => err ? reject(err) : resolve(result));
             } else {
                 this._db.collection(collection).insertOne(documents as T, (err, result) => err ? reject(err) : resolve(result));
             }
+        });
+    }
+
+    public getAll<T>(collection: string) {
+        return new Promise<T[]>((resolve, reject) => {
+            this._db.collection(collection).find().toArray((error, documents) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(documents);
+                }
+            });
         });
     }
 

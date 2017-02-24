@@ -3,29 +3,31 @@ var ts = require("gulp-typescript");
 var tslint = require("gulp-tslint");
 var nodemon = require("gulp-nodemon");
 
-gulp.task("copy:ejs", function() {
-    gulp.src(["./src/views/**/*"]).pipe(gulp.dest("./dist/views/"));
-});
-
-const tsProject = ts.createProject("tsconfig.json");
+function swallowError(error) {
+    console.log(error.toString());
+    this.emit("end");
+}
 
 function build() {
-    return gulp.src(["server/src/**/*.ts"])
+    const tsProject = ts.createProject("tsconfig.server.json");
+    
+    gulp.src(["server/src/**/*.ts"])
         .pipe(tslint({
             formatter: "verbose"
         }))
+        .on("error", swallowError)
         .pipe(tslint.report())
+        .on("error", swallowError)
         .pipe(tsProject())
         .js
         .pipe(gulp.dest("./server/dist"));
+
+    gulp.src(["server/src/views/**/*"]).pipe(gulp.dest("server/dist/views/"));
 }
 
 function watch() {
-    gulp.watch(["server/src/**/*.ts"], function() {
+    gulp.watch(["server/src/**/*.*"], function() {
         build();
-    });
-    gulp.watch(["server/dist/**/*.*"], function() {
-        livereload.changed();
     });
 }
 
