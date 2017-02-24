@@ -4,7 +4,8 @@
   "description": "Proverb is a simple app that stores the wise sayings of sages.  This is a collection of variations upon a the proverb theme.  Different versions of \"Proverb\" built using different technologies and techniques for kicks and giggles.  It's a playground for me.",
   "main": "/",
   "scripts": {
-    "start": "gulp",
+    "start": "gulp prodserver:start",
+    "postinstall": "gulp compile",
     "test": "karma start --reporters mocha,junit,coverage --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -17,7 +18,7 @@
     "url": "https://github.com/johnnyreilly/proverb-angular/issues"
   },
   "homepage": "https://github.com/johnnyreilly/proverb-angular",
-  "devDependencies": {
+  "dependencies": {
     "@types/fbemitter": "^2.0.32",
     "@types/flux": "0.0.32",
     "@types/history": "^2.0.39",
@@ -82,9 +83,7 @@
     "typings": "^1.4.0",
     "webpack": "^2.2.1",
     "webpack-notifier": "^1.2.1",
-    "yargs": "^5.0.0"
-  },
-  "dependencies": {
+    "yargs": "^5.0.0",
     "bootstrap-sass": "^3.3.7",
     "gulp-minify-css": "^1.2.4",
     "inversify": "^3.1.0",
