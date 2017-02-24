@@ -3,8 +3,8 @@ var sass = require("gulp-sass");
 var rename = require("gulp-rename");
 // var minifyCss = require("gulp-minify-css");
 
-var input = ["src/sass/main.scss"];
-var outputFolder = "dist/styles";
+var input = ["client/src/sass/main.scss"];
+var outputFolder = "client/dist/styles";
 
 function build() {
     return gulp.src(input)

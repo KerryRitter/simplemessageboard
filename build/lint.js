@@ -1,7 +1,7 @@
 var gulp = require("gulp");
 var tslint = require("gulp-tslint");
 
-var input = ["./src/ts/**/*.ts", "./test/**/*.ts", "!**/*.d.ts"];
+var input = ["./client/src/ts/**/*.ts", "./test/**/*.ts", "!**/*.d.ts"];
 
 function run() {
     return gulp.src(input)

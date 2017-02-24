@@ -4,6 +4,7 @@
         "tslint-react"
     ],
     "rules": {
+        "eofline": false,
         "class-name": true,
         "comment-format": [
             true,
@@ -21,6 +22,7 @@
         "jsx-self-close": true,
         "max-line-length": [false],
         "member-access": false,
+        "no-console": false,
         "no-duplicate-variable": true,
         "no-eval": true,
         "no-internal-module": true,

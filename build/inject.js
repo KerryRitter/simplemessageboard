@@ -6,23 +6,23 @@ var glob = require("glob");
 
 function injectIndex(options) {
   function run() {
-    var target = gulp.src("src/html/index.html");
+    var target = gulp.src("client/src/html/index.html");
     var sources = gulp.src([
-      "dist/styles/main*.css",
-      "dist/scripts/vendor*.js",
-      "dist/scripts/main*.js"
+      "client/dist/styles/main*.css",
+      "client/dist/scripts/vendor*.js",
+      "client/dist/scripts/main*.js"
     ], { read: false });
 
     return target
-      .pipe(inject(sources, { ignorePath: "/dist/", addRootSlash: false, removeTags: true }))
+      .pipe(inject(sources, { ignorePath: "/client/dist/", addRootSlash: false, removeTags: true }))
       .pipe(gulp.dest("dist"));
   }
 
-  var jsCssGlob = "dist/**/*.{js,css}";
+  var jsCssGlob = "client/dist/**/*.{js,css}";
 
   function checkForInitialFilesThenRun() {
     glob(jsCssGlob, function (er, files) {
-      var filesWeNeed = ["dist/scripts/main", "dist/scripts/vendor", "dist/styles/main"];
+      var filesWeNeed = ["client/dist/scripts/main", "client/dist/scripts/vendor", "client/dist/styles/main"];
 
       function fileIsPresent(fileWeNeed) {
         return files.some(function(file) {
@@ -41,7 +41,7 @@ function injectIndex(options) {
   checkForInitialFilesThenRun();
 
   if (options.shouldWatch) {
-    gulp.watch([jsCssGlob, "src/html/index.html"], function(evt) {
+    gulp.watch([jsCssGlob, "client/src/html/index.html"], function(evt) {
       if (evt.path && evt.type === "changed") {
         run(evt.path);
       }

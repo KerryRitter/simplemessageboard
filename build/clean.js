@@ -4,7 +4,7 @@ var del = require("del");
 var gutil = require("gulp-util");
 
 function run() {
-    return del(["./dist/**/*.*", "!./dist"], { force: true })
+    return del(["./client/dist/**/*.*", "!./dist"], { force: true })
         .then(function (paths) {
             gutil.log("Deleted files/folders:\n", paths.join("\n"));
         })

@@ -9,7 +9,7 @@ function swallowError(error) {
 }
 
 function build() {
-    return gulp.src(["src/ejs/**/*.ejs", "!src/ejs/components/**/*.ejs"])
+    return gulp.src(["server/src/views/**/*.ejs", "!server/src/views/components/**/*.ejs"])
         .pipe(ejs({
         }))
         .on("error", swallowError)
@@ -22,7 +22,7 @@ function build() {
 }
 
 function watch() {
-    gulp.watch(["src/ejs/**/*.ejs"], function() {
+    gulp.watch(["server/src/views/**/*.ejs"], function() {
         build();
     });
 }

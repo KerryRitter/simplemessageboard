@@ -9,22 +9,27 @@ var webpack = require("./build/webpack");
 var staticFiles = require("./build/staticFiles");
 var tests = require("./build/tests");
 var clean = require("./build/clean");
+var server = require("./build/server");
 var ejs = require("./build/ejs");
 
-gulp.task("sass:compile", function() {
+gulp.task("client:sass:compile", function() {
     sass.build();
 });
 
-gulp.task("ts:compile", function (done) {
+gulp.task("client:ts:compile", function (done) {
     webpack.build().then(function () { done(); });
 });
 
-gulp.task("ts:lint", function () {
+gulp.task("client:ts:lint", function () {
     lint.run();
 });
 
-gulp.task("compile:ejs", function() {
+gulp.task("server:ejs:compile", function() {
     ejs.build();
+});
+
+gulp.task("server:ts:compile", function() {
+    server.build();
 });
 
 gulp.task("static:compile", function () {
@@ -32,7 +37,7 @@ gulp.task("static:compile", function () {
 });
 
 gulp.task("compile", function() { 
-    runSequence("clean", ["sass:compile", "ts:compile", "compile:ejs", "static:compile"]);
+    runSequence("clean", ["client:sass:compile", "client:ts:compile", "server:ts:compile", "server:ejs:compile", "static:compile"]);
 });
 
 gulp.task("clean", function() {
@@ -47,25 +52,17 @@ gulp.task("watch", function (done) {
         sass.watch();
         staticFiles.watch();
         tests.watch();
+        server.watch();
         done();
     }).catch(function (error) {
         gutil.log("Problem generating initial assets (js and css)", error);
     });
 });
 
-gulp.task("server:start", function() {
-    connect.server({
-        root: "dist",
-        livereload: true
-    });
-
-    gulp.watch("dist/**/*.*", ["server:reload"]);
-});
-
-gulp.task("server:reload", function () {
-    gulp.src("dist/**/*.*").pipe(connect.reload());
+gulp.task("serve", function() {
+    server.serve();
 });
 
 gulp.task("default", function() {
-    runSequence("compile", ["watch", "server:start"]);
+    runSequence("compile", "watch", "serve");
 });

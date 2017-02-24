@@ -4,8 +4,8 @@ var gulp = require("gulp");
 var cache = require("gulp-cached");
 
 var targets = [
-  { description: "bootstrap-fonts", src: "./node_modules/bootstrap-sass/assets/fonts/**/*.*", dest: "./dist/fonts" },
-  { description: "images", src: "./src/images/**/*.*", dest: "./dist/images" }
+  { description: "bootstrap-fonts", src: "./node_modules/bootstrap-sass/assets/fonts/**/*.*", dest: "./client/dist/fonts" },
+  { description: "images", src: "./client/src/images/**/*.*", dest: "./client/dist/images" }
 ];
 
 function copy(options) {

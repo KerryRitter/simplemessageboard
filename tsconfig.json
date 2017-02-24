@@ -13,10 +13,10 @@
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "es2015",
+    "target": "es5",
     "baseUrl": ".",
     "paths": {
-        "*": ["./src/ts/*"]
+        "*": ["./client/src/ts/*"]
     }
   }
 }

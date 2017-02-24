@@ -18,7 +18,7 @@ var babelOptions = {
 module.exports = {
     cache: true,
     entry: {
-        main: "./src/ts/main.tsx",
+        main: "./client/src/ts/main.tsx",
         vendor: [
             "babel-polyfill",
             "jquery",
@@ -34,7 +34,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, "./dist/scripts"),
+        path: path.resolve(__dirname, "./client/dist/scripts"),
         filename: "[name].js",
         chunkFilename: "[chunkhash].js"
     },
