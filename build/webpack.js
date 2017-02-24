@@ -4,14 +4,14 @@ var gulp = require("gulp");
 var gutil = require("gulp-util");
 var webpack = require("webpack");
 var WebpackNotifierPlugin = require("webpack-notifier");
-var failPlugin = require("webpack-fail-plugin");
+// var failPlugin = require("webpack-fail-plugin");
 var webpackConfig = require("../webpack.config.js");
 var packageJson = require("../package.json");
 
 function buildProduction(done) {
    // modify some webpack config options
    var myProdConfig = Object.create(webpackConfig);
-   myProdConfig.output.filename = "[name].[hash].js";
+   myProdConfig.output.filename = "[name].js";
 
    myProdConfig.plugins = myProdConfig.plugins.concat(
       new webpack.DefinePlugin({
@@ -21,14 +21,14 @@ function buildProduction(done) {
               "NODE_ENV": JSON.stringify("production")
          }
       }),
-      new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.[hash].js" }),
+      new webpack.optimize.CommonsChunkPlugin({ name: "vendor", filename: "vendor.js" }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
          compress: {
             warnings: true
          }
-      }),
-      failPlugin
+      })
+    //   failPlugin
    );
 
    // run webpack

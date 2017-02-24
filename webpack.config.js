@@ -6,14 +6,12 @@ var webpack = require("webpack");
 
 var babelOptions = {
     "presets": [
-    "react",
-    [
-    "es2015",
-    {
-        "modules": false
-    }
-    ],
-    "es2016"
+        "react", [
+            "es2015", {
+                "modules": false
+            }
+        ],
+        "es2016"
     ]
 };
 
@@ -22,17 +20,17 @@ module.exports = {
     entry: {
         main: "./src/ts/main.tsx",
         vendor: [
-        "babel-polyfill",
-        "jquery",
-        "moment",
-        "fbemitter",
-        "flux",
-        "react",
-        "react-dom",
-        "react-bootstrap",
-        "react-router",
-        "react-router-bootstrap",
-        "toastr"
+            "babel-polyfill",
+            "jquery",
+            "moment",
+            "fbemitter",
+            "flux",
+            "react",
+            "react-dom",
+            "react-bootstrap",
+            "react-router",
+            "react-router-bootstrap",
+            "toastr"
         ]
     },
     output: {
@@ -65,11 +63,11 @@ module.exports = {
         }]
     },
     plugins: [ // Check gulp/webpack.js for build specific plugins
-    new webpack.ProvidePlugin({
-        "window.jQuery": "jquery",
-        "jQuery": "jquery",
-        "$": "jquery"
-    })
+        new webpack.ProvidePlugin({
+            "window.jQuery": "jquery",
+            "jQuery": "jquery",
+            "$": "jquery"
+        })
     ],
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.

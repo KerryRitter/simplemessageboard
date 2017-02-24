@@ -4,6 +4,7 @@
   "description": "Proverb is a simple app that stores the wise sayings of sages.  This is a collection of variations upon a the proverb theme.  Different versions of \"Proverb\" built using different technologies and techniques for kicks and giggles.  It's a playground for me.",
   "main": "/",
   "scripts": {
+    "start": "gulp",
     "test": "karma start --reporters mocha,junit,coverage --single-run --browsers PhantomJS"
   },
   "repository": {
@@ -47,7 +48,9 @@
     "gulp-cached": "^1.1.0",
     "gulp-connect": "^5.0.0",
     "gulp-cssmin": "^0.1.7",
+    "gulp-ejs": "^3.0.0",
     "gulp-eslint": "^3.0.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.0",
     "gulp-inject": "^4.0.0",
     "gulp-notify": "^2.2.0",
@@ -77,8 +80,7 @@
     "tslint-react": "^1.0.0",
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
-    "webpack": "^2.2.0",
-    "webpack-fail-plugin": "^1.0.4",
+    "webpack": "^2.2.1",
     "webpack-notifier": "^1.2.1",
     "yargs": "^5.0.0"
   },
