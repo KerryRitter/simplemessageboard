@@ -9,33 +9,45 @@ function swallowError(error) {
 }
 
 function build() {
-    const tsProject = ts.createProject("tsconfig.server.json");
+    const appProject = ts.createProject("app/tsconfig.json");
+    const libProject = ts.createProject("app/tsconfig.json");
+    const coreProject = ts.createProject("app/tsconfig.json");
     
-    gulp.src(["server/src/**/*.ts"])
+    gulp.src(["app/**/*.ts"])
         .pipe(tslint({
             formatter: "verbose"
         }))
         .on("error", swallowError)
         .pipe(tslint.report())
         .on("error", swallowError)
-        .pipe(tsProject())
+        .pipe(appProject())
         .js
-        .pipe(gulp.dest("./server/dist"));
+        .pipe(gulp.dest("dist/app"));
+    
+    gulp.src(["lib/**/*.ts"])
+        .pipe(libProject())
+        .js
+        .pipe(gulp.dest("dist/lib"));
+    
+    gulp.src(["core/**/*.ts"])
+        .pipe(coreProject())
+        .js
+        .pipe(gulp.dest("dist/core"));
 
-    gulp.src(["server/src/views/**/*"]).pipe(gulp.dest("server/dist/views/"));
+    gulp.src(["app/views/**/*"]).pipe(gulp.dest("dist/app/views/"));
 }
 
 function watch() {
-    gulp.watch(["server/src/**/*.*"], function() {
+    gulp.watch(["app/**/*.*"], function() {
         build();
     });
 }
 
 function serve() {
     nodemon({
-        script: "server/dist/app.js",
+        script: "dist/app/app.js",
         ext: "js",
-        watch: "server/dist"
+        watch: "dist"
     }).on("restart", function () {
         console.log("Reloading server");
     });

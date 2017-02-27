@@ -18,7 +18,7 @@ var babelOptions = {
 module.exports = {
     cache: true,
     entry: {
-        main: "./client/src/ts/main.tsx",
+        main: "./public/ts/bootstrap.tsx",
         vendor: [
             "babel-polyfill",
             "jquery",
@@ -34,7 +34,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, "./client/dist/scripts"),
+        path: path.resolve(__dirname, "dist/public/scripts"),
         filename: "[name].js",
         chunkFilename: "[chunkhash].js"
     },
@@ -43,26 +43,26 @@ module.exports = {
             test: /\.ts(x?)$/,
             exclude: /node_modules/,
             use: [
-            {
-                loader: "babel-loader",
-                options: babelOptions
-            },
-            {
-                loader: "ts-loader"
-            }
+                {
+                    loader: "babel-loader",
+                    options: babelOptions
+                },
+                {
+                    loader: "ts-loader"
+                }
             ]
         }, {
             test: /\.js$/,
             exclude: /node_modules/,
             use: [
-            {
-                loader: "babel-loader",
-                options: babelOptions
-            }
+                {
+                    loader: "babel-loader",
+                    options: babelOptions
+                }
             ]
         }]
     },
-    plugins: [ // Check gulp/webpack.js for build specific plugins
+    plugins: [
         new webpack.ProvidePlugin({
             "window.jQuery": "jquery",
             "jQuery": "jquery",
@@ -70,7 +70,6 @@ module.exports = {
         })
     ],
     resolve: {
-        // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: [".ts", ".tsx", ".js"]
-    },
+    }
 };
